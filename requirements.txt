@@ -1,0 +1,8 @@
+Django
+torch
+transformers
+nltk
+tokenizers
+io
+fpdf
+docx
