@@ -11,7 +11,8 @@ Built with **Python** and **Django**, this tool helps users quickly grasp key in
 - **Interactive Dashboard** — Simple UI for text input and output.  
 - **Customizable** — Set number of sentences (Extractive) or word limit (Abstractive).  
 - **Clean Summary Output** — Ready for copying, saving, or further processing.
-- **History*** — Stores every summary generated and can be viewed when needed.
+- **Downloadable Summary** — Generated summary can be downloaded as PDF or Word Document. 
+- **History** — Stores every summary generated and can be viewed when needed.
 
 ---
 
