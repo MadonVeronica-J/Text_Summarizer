@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .history-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .history-item p {
+            margin: 5px 0;
+        }
+        .history-item strong {
+            color: #007bff;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>History Panel</h1>
+        <a href="{% url 'summarizer_dashboard' %}">
+            <button>Back to Dashboard</button>
+        </a>
+        <div id="history">
+            {% for summary in summaries %}
+                <div class="history-item">
+                    <p><strong>Type:</strong> {{ summary.summary_type }}</p>
+                    <p><strong>Input:</strong> {{ summary.input_text }}</p>
+                    <p><strong>Summary:</strong> {{ summary.summary_text }}</p>
+                    <p><strong>Created At:</strong> {{ summary.created_at }}</p>
+                    <hr>
+                </div>
+            {% empty %}
+                <p>No past summaries found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

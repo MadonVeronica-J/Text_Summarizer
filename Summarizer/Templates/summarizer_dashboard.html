@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarizer Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .menu-container {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+        }
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .menu-icon:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 120px;
+            text-align: left;
+        }
+        .dropdown-menu a {
+            display: block;
+            text-decoration: none;
+            color: black;
+            padding: 8px;
+        }
+        .dropdown-menu a:hover {
+            background: #f0f0f0;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button {
+            margin: 10px 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .popup {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .download-buttons {
+            margin-top: 10px;
+            display: none;
+        }
+        .download-buttons button {
+            background-color: #28a745;
+        }
+        .download-buttons button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <button class="menu-icon" onclick="toggleMenu()">☰</button>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="{% url 'history' %}">History</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Text Summarizer</h1>
+        <form method="post">
+            <textarea id="text" rows="10" placeholder="Enter text here..."></textarea><br>
+            <button type="button" onclick="showPopup('extract')">Extractive Summary</button>
+            <button type="button" onclick="showPopup('abstract')">Abstractive Summary</button>
+        </form>
+        <div class="popup" id="popup">
+            <p id="popup-message"></p>
+            <input type="number" id="value" min="1">
+            <button onclick="summarizeText()">Summarize</button>
+        </div>
+        <h2>Summary:</h2>
+        <p id="summary"></p>
+        <div class="download-buttons" id="downloadButtons">
+            <a id="downloadWord" href="" download>
+                <button>Download as Word</button>
+            </a>
+            <a id="downloadPDF" href="" download>
+                <button>Download as PDF</button>
+            </a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function toggleMenu() {
+            let menu = document.getElementById("dropdownMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+        document.addEventListener("click", function(event) {
+            let menu = document.getElementById("dropdownMenu");
+            let button = document.querySelector(".menu-icon");
+            if (!menu.contains(event.target) && event.target !== button) {
+                menu.style.display = "none";
+            }
+        });
+        let summaryType = "";
+        function showPopup(type) {
+            summaryType = type;
+            document.getElementById('popup-message').innerText = 
+                type === 'extract' ? 'Enter number of sentences:' : 'Enter max words:';
+            document.getElementById('popup').style.display = 'block';
+        }
+        function summarizeText() {
+            let text = document.getElementById('text').value;
+            let value = document.getElementById('value').value;
+            $.post("/summarize/", {text: text, summary_type: summaryType, value: value, csrfmiddlewaretoken: "{{csrf_token}}"}, function(data) {
+                document.getElementById('summary').innerText = data.summary;
+                document.getElementById("downloadButtons").style.display = "block";
+                document.getElementById("downloadWord").href = `/download/word/${data.summary_id}/`;
+                document.getElementById("downloadPDF").href = `/download/pdf/${data.summary_id}/`;
+                document.getElementById('popup').style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>

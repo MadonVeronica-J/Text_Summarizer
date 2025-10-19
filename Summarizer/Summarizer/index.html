@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madone Veronica | Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1 class="logo">Veronica</h1>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-left" data-aos="fade-right">
+      <img src="images/profile.jpg" alt="Profile Photo" class="profile-pic">
+    </div>
+    <div class="hero-right" data-aos="fade-left">
+      <h1><span class="highlight">Hi, I’m</span> <strong>Madone Veronica</strong></h1>
+      <p class="subtitle">Software Developer | Java Enthusiast | Problem Solver</p>
+      <a href="#projects" class="btn">View My Work</a>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <h2 data-aos="fade-up">Projects</h2>
+
+    <div class="project-card" data-aos="fade-up" onclick="toggleProjectDetails(this)">
+      <img src="images/project1.jpg" alt="Project 1">
+      <h3>Event Management System</h3>
+      <p class="short-desc">A Django app for managing college events and participants.</p>
+      <div class="details">
+        <p>Features include event approval workflow, email notifications, and participant selection by department. Includes certificate generation and venue management.</p>
+        <a href="https://github.com/yourusername/event-management" target="_blank" class="btn small">GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-aos="fade-up" onclick="toggleProjectDetails(this)">
+      <img src="images/project2.jpg" alt="Project 2">
+      <h3>Text Summarizer</h3>
+      <p class="short-desc">An AI-powered summarizer using extractive and abstractive methods.</p>
+      <div class="details">
+        <p>Lets users input text and choose summary type with adjustable length. Built with Python, Flask, and NLP libraries.</p>
+        <a href="https://github.com/yourusername/text-summarizer" target="_blank" class="btn small">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <h2 data-aos="fade-up">Skills</h2>
+    <div class="skills-container">
+      <div class="skill-box" data-aos="fade-right">
+        <h3>💻 Technical Skills</h3>
+        <ul>
+          <li>Java</li>
+          <li>Spring Boot</li>
+          <li>MySQL</li>
+          <li>HTML / CSS / JS</li>
+          <li>Git & GitHub</li>
+          <!-- Add more here -->
+        </ul>
+      </div>
+
+      <div class="skill-box" data-aos="fade-left">
+        <h3>🧠 Managerial & Soft Skills</h3>
+        <ul>
+          <li>Leadership</li>
+          <li>Communication</li>
+          <li>Problem Solving</li>
+          <li>Time Management</li>
+          <!-- Add more here -->
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2 data-aos="fade-up">Contact</h2>
+    <p>Let’s connect for opportunities or collaborations.</p>
+    <a href="mailto:your.email@example.com" class="btn">Email Me</a>
+    <div class="socials">
+      <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Madone Veronica | Built with ❤️ using HTML, CSS, and JS</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 800, once: true });</script>
+</body>
+</html>
